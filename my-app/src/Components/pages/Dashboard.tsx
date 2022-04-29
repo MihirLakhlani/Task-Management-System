@@ -25,7 +25,7 @@ const Dashboard = () => {
                     </tbody>
                 </table>
 
-                <input  />
+                
             </div>
     </>
   )

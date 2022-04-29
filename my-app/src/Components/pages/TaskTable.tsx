@@ -5,8 +5,8 @@ const Task_Table = () => {
   return (
     <>
     <br />
-    <NavLink to={"/task_form"}>
-        <button className="btn bg-info">Add Task </button>
+        <NavLink to={"/task_form"}>
+        <button className="btn bg-info">Add Task</button>
         </NavLink>
       <table className="table">
         <thead>

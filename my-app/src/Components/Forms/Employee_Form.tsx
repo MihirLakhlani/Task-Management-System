@@ -1,33 +1,63 @@
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const Employee_Form = () => {
 
-    const [fname,setFname] = useState(null);
-    const [lname,setLname] = useState(null);
-    const [email,setEmail] = useState(null);
-    const [phone,setPhone] = useState(null);
-    const [password,setPassword] = useState(null);
-    const [designation, setdesignation] = useState(null);
+    const url = "http://localhost:4000/posts"
 
-    
-    const handleChange = (e:any) => {
-        e.preventDefault()
-    }
+  const [employeeinput, setEmployeeinput] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",      
+    phone: "",
+    password: "",
+    designation: "",
+  });
+
+  const handleinput = (e: any) => {
+    const name:any = e.target.name;
+    const value:any = e.target.value;
+
+    setEmployeeinput({ ...employeeinput , [name] : value });
+    console.log(name, value);
+  };
+
+  const handleSubmit = (e: any) => {
+
+    e.preventDefault();
+    axios.post(url,{
+        firstname:employeeinput.firstname,
+        lastname:employeeinput.lastname,
+        email:employeeinput.email,
+        phone:employeeinput.phone,
+        password:employeeinput.password,
+        designation:employeeinput.designation
+    }).then((res)=>
+    {
+        console.log(res.data)
+    })
+
+  };
+
   return (
-    <>      
+    <>
       <div className="container-fluid">
-        <form onSubmit={handleChange}>
+        <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
               First_Name
             </label>
             <input
-            onChange={(e:any)=>{setFname(e.target.value)}}
-              type="email"
+              value={employeeinput.firstname}
+              type="text"
+              onChange={handleinput}
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
+              name="firstname"
             />
           </div>
           <div className="mb-3">
@@ -35,11 +65,14 @@ const Employee_Form = () => {
               Last_Name
             </label>
             <input
-            // onChange={}
-              type="email"
+              // onChange={}
+              onChange={handleinput}
+              value={employeeinput.lastname}
+              type="text"
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
+              name="lastname"
             />
           </div>
           <div className="mb-3">
@@ -47,10 +80,13 @@ const Employee_Form = () => {
               Email address
             </label>
             <input
+              onChange={handleinput}
+              value={employeeinput.email}
               type="email"
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
+              name="email"
             />
           </div>
           <div className="mb-3">
@@ -58,10 +94,13 @@ const Employee_Form = () => {
               Phone
             </label>
             <input
-              type="email"
+              onChange={handleinput}
+              value={employeeinput.phone}
+              type="tel"
               className="form-control"
               id="exampleInputPhone"
-              aria-describedby="emailHelp"
+              aria-describedby="phoneHelp"
+              name="phone"
             />
           </div>
           <div className="mb-3">
@@ -69,18 +108,27 @@ const Employee_Form = () => {
               Password
             </label>
             <input
+              name="password"
+              onChange={handleinput}
+              value={employeeinput.password}
               type="password"
-              className = "form-control"
+              className="form-control"
               id="exampleInputPassword1"
             />
           </div>
-          <div> 
-          designation
-             <br /> <select>  
-          <option>select</option>
-          <option value="xyz"></option>
-          <option value="ughj"></option>
-          </select> <br /> <br />
+          <div>
+            designation
+            <br />
+            <select
+              name="designation"
+              value={employeeinput.designation}
+              onChange={handleinput}
+            >
+              <option>select</option>
+              <option value="xyz"></option>
+              <option value="ughj"></option>
+            </select>{" "}
+            <br /> <br />
           </div>
           {/* <div className="dropdown">
             <button

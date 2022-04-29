@@ -60,7 +60,7 @@ const Project_table = () => {
 
       </div>
 
-    <NavLink to={"/project_Form"}>
+     <NavLink to={"/project_Form"}>
       <button className="btn bg-info">
           Add Project
         </button>
@@ -86,7 +86,7 @@ const Project_table = () => {
         </thead>
         <tbody>
           <tr>
-            <td><input type="checkbox" /> </td>
+            <td><input type="checkbox" /></td>
             <td>1</td>
             <td>12/05/2000</td>
             <td>25/05/2000</td>

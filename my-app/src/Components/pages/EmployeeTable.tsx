@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import * as AiIcons from "react-icons/ai";
+import axios from "axios";
 
 const EmployeeTable = () => {
+const [data,setData] = useState([])
+const url = "http://localhost:4000/posts"
+
+  useEffect(()=> {
+    axios.get(url).then((res)=>
+    {
+      console.log(res.data);
+    })
+  },[])
+
   return (
     <>
           <table>
@@ -21,8 +32,8 @@ const EmployeeTable = () => {
 <br />
       <NavLink to={"/employee_form"}>
         <button className="btn bg-info">
-          {/* <AiIcons.AiFillPlusSquare /> */}
-        Add Employee</button>
+             Add Employee
+        </button>
         <br />
       </NavLink>
       <br />
